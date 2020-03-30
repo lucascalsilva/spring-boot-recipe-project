@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Recipes</title>
+</head>
+<body>
+<h1 th:text="${recipe.description}"></h1>
+
+<p>
+    <label for="prepTime">Preparation Time:</label>
+    <span id="prepTime" th:text="${recipe.prepTime}"></span>
+</p>
+
+<p>
+    <label for="cookTime">Cook Time:</label>
+    <span id="cookTime" th:text="${recipe.cookTime}"></span>
+</p>
+
+<p>
+    <label for="servings">Servings:</label>
+    <span id="servings" th:text="${recipe.servings}"></span>
+</p>
+
+<p>
+    <label for="source">Source:</label>
+    <span id="source" th:text="${recipe.source}"></span>
+</p>
+
+<p>
+    <label for="url">URL:</label>
+    <a id="url" th:href="@{${recipe.url}}" th:text="${recipe.url}"></a>
+</p>
+
+<p>
+    <label for="directions">Directions:</label>
+    <span id="directions" th:text="${recipe.directions}"></span>
+</p>
+
+<p>
+    <label for="difficulty">Difficulty:</label>
+    <span id="difficulty" th:text="${recipe.difficulty}"></span>
+</p>
+
+<p>
+    <label for="notes">Notes:</label>
+    <span id="notes" th:text="${recipe.notes.recipeNotes}"></span>
+</p>
+
+<label for="categories">Categories</label>
+
+<table id="categories">
+    <tbody>
+    <tr th:each="category : ${recipe.categories}">
+        <td>
+            <span th:text="${category.categoryName}"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<label for="ingredients">Ingredients</label>
+
+<table id="ingredients">
+    <tbody>
+    <tr th:each="ingredient : ${recipe.ingredients}">
+        <td>
+            <span th:text="${ingredient.quantity} +' '+ ${ingredient.unitOfMeasure.description} +' '+ ${ingredient.description}"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
