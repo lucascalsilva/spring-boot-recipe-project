@@ -6,72 +6,102 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Recipes</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
 </head>
 <body>
-<h1 th:text="${recipe.description}"></h1>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1 class="panel-title" th:text="${recipe.description}"></h1>
+                </div>
 
-<p>
-    <label for="prepTime">Preparation Time:</label>
-    <span id="prepTime" th:text="${recipe.prepTime}"></span>
-</p>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="prepTime">Preparation Time:</label>
+                        <span class="form-control-static" id="prepTime" th:text="${recipe.prepTime}"></span>
+                    </div>
 
-<p>
-    <label for="cookTime">Cook Time:</label>
-    <span id="cookTime" th:text="${recipe.cookTime}"></span>
-</p>
+                    <div class="form-group">
+                        <label for="cookTime">Cook Time:</label>
+                        <span id="cookTime" th:text="${recipe.cookTime}"></span>
+                    </div>
 
-<p>
-    <label for="servings">Servings:</label>
-    <span id="servings" th:text="${recipe.servings}"></span>
-</p>
+                    <div class="form-group">
+                        <label for="servings">Servings:</label>
+                        <span class="form-control-static" id="servings" th:text="${recipe.servings}"></span>
+                    </div>
 
-<p>
-    <label for="source">Source:</label>
-    <span id="source" th:text="${recipe.source}"></span>
-</p>
+                    <div class="form-group">
+                        <label for="source">Source:</label>
+                        <span id="source" th:text="${recipe.source}"></span>
+                    </div>
 
-<p>
-    <label for="url">URL:</label>
-    <a id="url" th:href="@{${recipe.url}}" th:text="${recipe.url}"></a>
-</p>
+                    <div class="form-group">
+                        <label for="url">URL:</label>
+                        <a id="url" th:href="@{${recipe.url}}" th:text="${recipe.url}"></a>
+                    </div>
 
-<p>
-    <label for="directions">Directions:</label>
-    <span id="directions" th:text="${recipe.directions}"></span>
-</p>
+                    <div class="form-group">
+                        <label for="directions">Directions:</label>
+                        <span id="directions" th:text="${recipe.directions}"></span>
+                    </div>
 
-<p>
-    <label for="difficulty">Difficulty:</label>
-    <span id="difficulty" th:text="${recipe.difficulty}"></span>
-</p>
+                    <div class="form-group">
+                        <label for="difficulty">Difficulty:</label>
+                        <span id="difficulty" th:text="${recipe.difficulty}"></span>
+                    </div>
 
-<p>
-    <label for="notes">Notes:</label>
-    <span id="notes" th:text="${recipe.notes.recipeNotes}"></span>
-</p>
+                    <div class="form-group">
+                        <label for="notes">Notes:</label>
+                        <span id="notes" th:text="${recipe.notes.recipeNotes}"></span>
+                    </div>
 
-<label for="categories">Categories</label>
+                    <label for="categories">Categories</label>
 
-<table id="categories">
-    <tbody>
-    <tr th:each="category : ${recipe.categories}">
-        <td>
-            <span th:text="${category.categoryName}"></span>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                    <div id="categories" class="table-responsive"
+                         th:if="${not #lists.isEmpty(recipe.categories)}">
+                        <table class="table table-hover">
+                            <thead class="thead-inverse">
+                            <tbody>
+                            <tr th:each="category : ${recipe.categories}">
+                                <td>
+                                    <span th:text="${category.categoryName}"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
-<label for="ingredients">Ingredients</label>
+                    <label for="ingredients">Ingredients</label>
 
-<table id="ingredients">
-    <tbody>
-    <tr th:each="ingredient : ${recipe.ingredients}">
-        <td>
-            <span th:text="${ingredient.quantity} +' '+ ${ingredient.unitOfMeasure.description} +' '+ ${ingredient.description}"></span>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                    <div id="ingredients" class="table-responsive"
+                         th:if="${not #lists.isEmpty(recipe.ingredients)}">
+                        <table class="table table-hover">
+                            <thead class="thead-inverse">
+                            <tbody>
+                            <tr th:each="ingredient : ${recipe.ingredients}">
+                                <td>
+                                    <span th:text="${ingredient.quantity} +' '+ ${ingredient.unitOfMeasure.description} +' '+ ${ingredient.description}"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

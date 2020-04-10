@@ -4,7 +4,10 @@ import guru.springframework.recipeproject.model.*;
 import guru.springframework.recipeproject.repositories.CategoryRepository;
 import guru.springframework.recipeproject.repositories.RecipeRepository;
 import guru.springframework.recipeproject.repositories.UnitOfMeasureRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -12,6 +15,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
 
 import javax.naming.Context;
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,20 +23,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
+@RequiredArgsConstructor
+@Slf4j
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     private final RecipeRepository recipeRepository;
     private final CategoryRepository categoryRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
 
-    public DataLoader(RecipeRepository recipeRepository, CategoryRepository categoryRepository, UnitOfMeasureRepository unitOfMeasureRepository) {
-        this.recipeRepository = recipeRepository;
-        this.categoryRepository = categoryRepository;
-        this.unitOfMeasureRepository = unitOfMeasureRepository;
-    }
-
     @Override
+    @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
+        log.debug("Starting dataloader component...");
+        log.debug("Creating recipe 1");
         Recipe recipe1 = new Recipe();
         recipe1.setDescription("Perfect Guacamole Recipe");
 
@@ -106,6 +109,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 .orElseThrow(() -> new RuntimeException("Category not found..."));
         recipe1.addCategory(category1);
 
+        log.debug("Creating recipe 2");
         Recipe recipe2 = new Recipe();
         recipe2.setDescription("Spicy Grilled Chicken Tacos");
 
@@ -162,7 +166,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         recipe2.setPrepTime(35);
         recipe2.setUrl("https://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/");
 
-        System.out.println("Adding recipes...");
+        log.debug("Persisting recipes...");
 
         recipeRepository.save(recipe1);
         recipeRepository.save(recipe2);

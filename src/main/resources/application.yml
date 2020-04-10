@@ -2,3 +2,6 @@ spring:
   h2:
     console:
       enabled: true
+logging.level:
+  guru.springframework.recipeproject.bootstrap: debug
+  guru.springframework.recipeproject.controllers: debug
