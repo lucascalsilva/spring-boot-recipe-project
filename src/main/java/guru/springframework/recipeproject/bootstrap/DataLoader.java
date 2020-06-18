@@ -38,7 +38,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         log.debug("Creating recipe 1");
         Recipe recipe1 = new Recipe();
         recipe1.setDescription("Perfect Guacamole Recipe");
-
+        recipe1.setDifficulty(Difficulty.MODERATE);
         String[] recipe1Ingredients = {"2 unit ripe avocados",
                 "0.25 teaspoon of salt, more to taste",
                 "1 tablespoon fresh lime juice or lemon juice",
@@ -54,7 +54,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 + "\n2 Mash with a fork: Using a fork, roughly mash the avocado. (Don't overdo it! The recipe1 should be a little chunky.)"
                 + "\n3 Add salt, lime juice, and the rest: Sprinkle with salt and lime (or lemon) juice. The acid in the lime juice will provide some balance to the richness of the avocado and will help delay the avocados from turning brown"
                 + " Add the chopped onion, cilantro, black pepper, and chiles. Chili peppers vary individually in their hotness. So, start with a half of one chili pepper and add to the recipe1 to your desired degree of hotness."
-                + " Remember that much of this is done to taste because of the variability in the fresh ingredients. Start with this recipe and adjust to your taste."
+                + " Remember that much of this is done to taste because of the variability in the fresh ingredient. Start with this recipe and adjust to your taste."
                 + " Chilling tomatoes hurts their flavor, so if you want to add chopped tomato to your recipe1, add it just before serving."
                 + "\n4 Serve: Serve immediately, or if making a few hours ahead, place plastic wrap on the surface of the recipe1 and press down to cover it and to prevent air reaching it. (The oxygen in the air causes oxidation which will turn the recipe1 brown.) Refrigerate until ready to serve.");
 
@@ -65,7 +65,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 "\nINGREDIENTS FOR EASY GUACAMOLE" +
                 "\nAll you really need to make guacamole is ripe avocados and salt. After that, a little lime or lemon juice—a splash of acidity—will help to balance the richness of the avocado. Then if you want, add chopped cilantro, chiles, onion, and/or tomato." +
                 "\nGUACAMOLE TIP: USE RIPE AVOCADOS" +
-                "\nThe trick to making perfect guacamole is using ripe avocados that are just the right amount of ripeness. Not ripe enough and the avocado will be hard and tasteless. Too ripe and the taste will be off." +
+                "\nThe trick to making perfect guacamole is using ripe avocados that are just the right quantity of ripeness. Not ripe enough and the avocado will be hard and tasteless. Too ripe and the taste will be off." +
                 "\nCheck for ripeness by gently pressing the outside of the avocado. If there is no give, the avocado is not ripe yet and will not taste good. If there is a little give, the avocado is ripe. If there is a lot of give, the avocado may be past ripe and not good. In this case, taste test first before using." +
                 "\nRemove the pit from the avocado with a chef knife" +
                 "\nTHE BEST WAY TO CUT AN AVOCADO" +
@@ -77,7 +77,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 "\nHomemade guacamole on a chip" +
                 "\nGUACAMOLE VARIATIONS" +
                 "\nOnce you have basic guacamole down, feel free to experiment with variations including strawberries, peaches, pineapple, mangoes, even watermelon. One classic Mexican guacamole has pomegranate seeds and chunks of peaches in it (a Diana Kennedy favorite). You can get creative with homemade guacamole!" +
-                "\nSimple Guacamole: The simplest version of guacamole is just mashed avocados with salt. Don’t let the lack of availability of other ingredients stop you from making guacamole." +
+                "\nSimple Guacamole: The simplest version of guacamole is just mashed avocados with salt. Don’t let the lack of availability of other ingredient stop you from making guacamole." +
                 "\nQuick guacamole: For a very quick guacamole just take a 1/4 cup of salsa and mix it in with your mashed avocados." +
                 "\nDon’t have enough avocados? To extend a limited supply of avocados, add either sour cream or cottage cheese to your guacamole dip. Purists may be horrified, but so what? It tastes great." +
                 "\nHere are a few other guacamole recipes to try:" +
@@ -92,7 +92,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 "\nGuacamole is great in foods, as well. Try mixing some guacamole into a tuna sandwich or your next batch of deviled eggs." +
                 "\nHOW TO STORE GUACAMOLE" +
                 "\nGuacamole is best eaten right after it’s made. Like apples, avocados start to oxidize and turn brown once they’ve been cut. That said, the acid in the lime juice you add to guacamole can help slow down that process, and if you store the guacamole properly, you can easily make it a few hours ahead if you are preparing for a party." +
-                "\nThe trick to keeping guacamole green is to make sure air doesn’t touch it! Transfer it to a container, cover with plastic wrap, and press down on the plastic wrap to squeeze out any air pockets. Make sure any exposed surface of the guacamole is touching the plastic wrap, not air. This will keep the amount of browning to a minimum." +
+                "\nThe trick to keeping guacamole green is to make sure air doesn’t touch it! Transfer it to a container, cover with plastic wrap, and press down on the plastic wrap to squeeze out any air pockets. Make sure any exposed surface of the guacamole is touching the plastic wrap, not air. This will keep the quantity of browning to a minimum." +
                 "\nYou can store the guacamole in the fridge this way for up to three days." +
                 "\nIf you leave the guacamole exposed to air, it will start to brown and discolor. That browning isn’t very appetizing, but the guacamole is still good. You can either scrape off the brown parts and discard, or stir them into the rest of the guacamole.");
 
@@ -105,12 +105,13 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
         recipe1.setServings(4);
         recipe1.setPrepTime(4);
         recipe1.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
-        Category category1 = categoryRepository.findByCategoryNameIgnoreCase("Mexican")
+        Category category1 = categoryRepository.findByNameIgnoreCase("Mexican")
                 .orElseThrow(() -> new RuntimeException("Category not found..."));
         recipe1.addCategory(category1);
 
         log.debug("Creating recipe 2");
         Recipe recipe2 = new Recipe();
+        recipe2.setDifficulty(Difficulty.MODERATE);
         recipe2.setDescription("Spicy Grilled Chicken Tacos");
 
         String[] recipe2Ingredients = {"2 tablespoon ancho chili powder",
@@ -147,13 +148,13 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
                 "\nToday’s tacos are more purposeful – a deliberate meal instead of a secretive midnight snack!" +
                 "\nFirst, I marinate the chicken briefly in a spicy paste of ancho chile powder, oregano, cumin, and sweet orange juice while the grill is heating. You can also use this time to prepare the taco toppings." +
                 "\nGrill the chicken, then let it rest while you warm the tortillas. Now you are ready to assemble the tacos and dig in. The whole meal comes together in about 30 minutes!" +
-                "\nSpicy Grilled Chicken TacosThe ancho chiles I use in the marinade are named for their wide shape. They are large, have a deep reddish brown color when dried, and are mild in flavor with just a hint of heat. You can find ancho chile powder at any markets that sell Mexican ingredients, or online." +
+                "\nSpicy Grilled Chicken TacosThe ancho chiles I use in the marinade are named for their wide shape. They are large, have a deep reddish brown color when dried, and are mild in flavor with just a hint of heat. You can find ancho chile powder at any markets that sell Mexican ingredient, or online." +
                 "\nI like to put all the toppings in little bowls on a big platter at the center of the table: avocados, radishes, tomatoes, red onions, wedges of lime, and a sour cream sauce. I add arugula, as well – this green isn’t traditional for tacos, but we always seem to have some in the fridge and I think it adds a nice green crunch to the tacos." +
                 "\nEveryone can grab a warm tortilla from the pile and make their own tacos just they way they like them." +
                 "\nYou could also easily double or even triple this recipe for a larger party. A taco and a cold beer on a warm day? Now that’s living!");
         recipe2.setNotes(notes2);
 
-        Category category2 = categoryRepository.findByCategoryNameIgnoreCase("American")
+        Category category2 = categoryRepository.findByNameIgnoreCase("American")
                 .orElseThrow(() -> new RuntimeException("Category not found..."));
         recipe2.addCategory(category1);
         recipe2.addCategory(category2);

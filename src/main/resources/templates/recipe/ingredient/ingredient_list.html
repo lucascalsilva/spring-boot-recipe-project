@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ingredients</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script rel="stylesheet" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
+
+    <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"
+            src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <h1 class="panel-title pull-left">Ingredient List</h1>
+                        </div>
+                        <div class="col-md-1">
+                            <a class="btn btn-default pull-right" th:href="@{'ingredients/new'}" role="button">New Ingredient</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive" th:if="${not #lists.isEmpty(ingredients)}">
+                        <table class="table table-hover">
+                            <thead class="thead-inverse">
+                            <tr>
+                                <td>ID</td>
+                                <td>Description</td>
+                                <td>Quantity</td>
+                                <td>Unit of Measure</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="ingredient : ${ingredients}">
+                                <td><a th:text="${ingredient.id}"></a></td>
+                                <td th:text="${ingredient.description}"></td>
+                                <td th:text="${ingredient.quantity.doubleValue()}"></td>
+                                <td th:text="${ingredient.unitOfMeasure.description}"></td>
+                                <td><a class="glyphicon glyphicon-eye-open" th:href="@{'ingredients/' + ${ingredient.id} + '/show'}"></a></td>
+                                <td><a class="glyphicon glyphicon-pencil" th:href="@{'ingredients/' + ${ingredient.id} + '/update'}"></a></td>
+                                <td><a class="glyphicon glyphicon-remove" th:href="@{'ingredients/' + ${ingredient.id} + '/delete'}"></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

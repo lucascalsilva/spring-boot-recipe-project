@@ -1,17 +1,17 @@
 package guru.springframework.recipeproject.model;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString(callSuper = true)
 @Setter
 @Getter
+@SuperBuilder
+@NoArgsConstructor
 @Entity
 public class Ingredient extends BaseEntity {
 

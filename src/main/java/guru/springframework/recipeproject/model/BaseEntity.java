@@ -1,9 +1,7 @@
 package guru.springframework.recipeproject.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,6 +10,8 @@ import javax.persistence.MappedSuperclass;
 import java.util.Objects;
 
 @Data
+@SuperBuilder
+@NoArgsConstructor
 @MappedSuperclass
 public class BaseEntity {
 
@@ -19,7 +19,6 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -29,7 +28,7 @@ public class BaseEntity {
         return id != null && Objects.equals(id, that.id);
     }
 
-    @Override
+
     public int hashCode() {
         return 13;
     }

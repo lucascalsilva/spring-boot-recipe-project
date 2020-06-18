@@ -1,18 +1,18 @@
 package guru.springframework.recipeproject.model;
 
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString(callSuper = true)
 @Setter
 @Getter
+@SuperBuilder
+@NoArgsConstructor
 @Entity
 public class Recipe extends BaseEntity {
 
@@ -41,6 +41,9 @@ public class Recipe extends BaseEntity {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
     private Set<Ingredient> ingredients = new HashSet<Ingredient>();
 
+    @Lob
+    private Byte[] image;
+
     public void addIngredient(Ingredient ingredient){
         this.ingredients.add(ingredient);
         ingredient.setRecipe(this);
@@ -51,7 +54,9 @@ public class Recipe extends BaseEntity {
     }
 
     public void setNotes(Notes notes){
-        this.notes = notes;
-        notes.setRecipe(this);
+        if(notes != null) {
+            this.notes = notes;
+            notes.setRecipe(this);
+        }
     }
 }

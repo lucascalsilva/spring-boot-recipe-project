@@ -26,4 +26,10 @@ public class UnitOfMeasureRepositoryIT {
         assertThat(unitOfMeasure.isPresent()).isTrue();
         assertThat(unitOfMeasure.get().getDescription()).isEqualTo("Teaspoon");
     }
+
+    @Test
+    public void findByDescriptionCup() throws Exception {
+        Optional<UnitOfMeasure> uomOptional = unitOfMeasureRepository.findByDescriptionIgnoreCase("Cup");
+        assertThat(uomOptional.get().getDescription()).isEqualTo("Cup");
+    }
 }
