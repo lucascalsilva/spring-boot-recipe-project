@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationListener;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,7 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 @Slf4j
+@Profile("profile")
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
     private final RecipeRepository recipeRepository;
